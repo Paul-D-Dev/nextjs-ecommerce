@@ -26,6 +26,16 @@ export class Product {
         const products: Product[] = await client.fetch(query);
         return products.map(product => new Product(product));
     }
+
+    toJSON() {
+        return {
+            name: this.name,
+            slug: this.slug,
+            details: this.details,
+            price: this.price,
+            image: this.image
+        }
+    }
 }
 
 

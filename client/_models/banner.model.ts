@@ -8,8 +8,8 @@ export class Banner {
     desc: string;
     smallText: string;
     midText: string;
-    lastText1: string;
-    lastText2: string;
+    largeText1: string;
+    largeText2: string;
     discount: string;
     saleTime: string;
 
@@ -20,15 +20,30 @@ export class Banner {
         this.desc = inputs.desc;
         this.smallText = inputs.smallText;
         this.midText = inputs.midText;
-        this.lastText1 = inputs.lastText1;
-        this.lastText2 = inputs.lastText2;
+        this.largeText1 = inputs.largeText1;
+        this.largeText2 = inputs.largeText2;
         this.discount = inputs.discount;
         this.saleTime = inputs.saleTime;
     }
 
     static async fetchBanner(): Promise<Banner> {
         const bannerQuery = `*[_type == "banner"]`;
-        const bannerData: Banner = await client.fetch(bannerQuery);
-        return new Banner(bannerData);
+        const bannerData: Banner[] = await client.fetch(bannerQuery);
+        return new Banner(bannerData[0]);
+    }
+
+    toJSON() {
+        return {
+            image: this.image,
+            buttonText: this.buttonText,
+            product: this.product,
+            desc: this.desc,
+            smallText: this.smallText,
+            midText: this.midText,
+            lastText1: this.largeText1,
+            lastText2: this.largeText2,
+            discount: this.discount,
+            saleTime: this.saleTime
+        }
     }
 }
