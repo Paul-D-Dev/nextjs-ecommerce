@@ -8,14 +8,14 @@ type Props = {
   product: ProductModel;
 };
 
-const Product: FunctionComponent<Props> = ({ product: { image, name, slug, price} }) => {
+const Product: FunctionComponent<Props> = ({ product: { images, name, slug, price} }) => {
     return (
         <div>
             <Link href={`/product/${slug.current}`}>
                 <a className={styles.product_card}>
                     <img
                         className={styles.product_image}
-                        src={urlFor(image && image[0]).url()}
+                        src={urlFor(images && images[0]).url()}
                         alt={name}
                         width={250}
                         height={250}
