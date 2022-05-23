@@ -40,8 +40,8 @@ export class Banner {
             desc: this.desc,
             smallText: this.smallText,
             midText: this.midText,
-            lastText1: this.largeText1,
-            lastText2: this.largeText2,
+            largeText1: this.largeText1,
+            largeText2: this.largeText2,
             discount: this.discount,
             saleTime: this.saleTime
         }
