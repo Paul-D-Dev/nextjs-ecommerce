@@ -23,7 +23,7 @@ const Home: FunctionComponent<Props> = ({productsData, bannerData}) => {
             }
         </div>
 
-        <FooterBanner />
+        <FooterBanner footerBanner={bannerData} />
       </>
   )
 }
