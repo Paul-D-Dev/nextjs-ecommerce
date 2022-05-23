@@ -1,11 +1,11 @@
 import React, {FunctionComponent} from 'react';
 import {Banner} from "../_models/banner.model";
-import {Product} from "../_models/product.model";
+import {Product as ProductModel} from "../_models/product.model";
 import styles from '../styles/Home.module.scss';
-import { HeroBanner, FooterBanner } from '../components';
+import {HeroBanner, FooterBanner, Product} from '../components';
 
 type Props = {
-    productsData: Product[];
+    productsData: ProductModel[];
     bannerData: Banner;
 }
 
@@ -17,8 +17,10 @@ const Home: FunctionComponent<Props> = ({productsData, bannerData}) => {
             <h2>Best Selling Products</h2>
             <p>Speakers of many variations</p>
         </div>
-        <div>
-            {productsData?.map((product) => product.name)}
+        <div className={styles.products_container}>
+            {productsData?.map((product) =>
+                <Product key={product._id} product={product}/>)
+            }
         </div>
 
         <FooterBanner />
@@ -28,7 +30,7 @@ const Home: FunctionComponent<Props> = ({productsData, bannerData}) => {
 
 // As useEffect for Next.js
 export const getServerSideProps = async () => {
-  const productsData = await Product.fetchProducts();
+  const productsData = await ProductModel.fetchProducts();
   const bannerData = await Banner.fetchBanner();
 
   return {
