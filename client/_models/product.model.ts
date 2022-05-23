@@ -1,12 +1,8 @@
 import {client} from "../lib/sanity-client";
 import {Image} from "./image.interface";
 
-interface Slug {
-    current: string;
-    _type: string;
-}
-
 export class Product {
+    _id: string;
     name: string;
     slug: Slug;
     details: string;
@@ -14,6 +10,7 @@ export class Product {
     image: Image[];
 
     constructor(inputs: Product) {
+        this._id = inputs._id;
         this.name = inputs.name;
         this.slug = inputs.slug;
         this.details = inputs.details;
@@ -29,6 +26,7 @@ export class Product {
 
     toJSON() {
         return {
+            _id: this._id,
             name: this.name,
             slug: this.slug,
             details: this.details,
@@ -36,6 +34,11 @@ export class Product {
             image: this.image
         }
     }
+}
+
+interface Slug {
+    current: string;
+    _type: string;
 }
 
 
