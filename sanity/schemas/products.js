@@ -28,8 +28,8 @@ export default {
             type: 'number'
         },
         {
-            name: 'image',
-            title: 'Image',
+            name: 'images',
+            title: 'Images',
             type: 'array',
             of: [{type: 'image'}],
             options: {
