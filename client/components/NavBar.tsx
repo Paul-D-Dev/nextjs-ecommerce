@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/NavBar.module.scss';
+import styles from '../styles/Navbar.module.scss';
 import Link from 'next/link';
 import { AiOutlineShopping} from "react-icons/ai";
 
