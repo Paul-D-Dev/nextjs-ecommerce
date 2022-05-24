@@ -1,7 +1,10 @@
+@import './variables.scss';
+
+
 .footer_banner{
   &_container {
     padding: 100px 40px;
-    background-color: #f02d34;
+    background-color: $primary-color;
     border-radius: 15px;
     position: relative;
     height: 400px;
@@ -27,7 +30,7 @@
     border-radius: 15px;
     padding: 10px 16px;
     background-color: white;
-    color: red;
+    color: $primary-color;
     border: none;
     margin-top: 40px;
     font-size: 18px;

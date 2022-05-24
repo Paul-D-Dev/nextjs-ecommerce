@@ -1,7 +1,9 @@
+@import './variables.scss';
+
 .products_heading{
   text-align: center;
   margin: 40px 0;
-  color: #324d67;
+  color: $accent-color;
 }
 
 .products_heading h2{

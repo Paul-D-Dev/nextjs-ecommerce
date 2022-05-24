@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .hero_banner_container{
   padding: 100px 40px;
   background-color: #dcdcdc;
@@ -14,7 +16,7 @@
   button{
     border-radius: 15px;
     padding: 10px 16px;
-    background-color: #f02d34;
+    background-color: $primary-color;
     color: white;
     border: none;
     margin-top: 40px;
