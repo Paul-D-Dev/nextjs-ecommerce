@@ -1,4 +1,5 @@
 import {GetStaticProps} from "next";
+import Img from "next/image";
 import React, {FunctionComponent, useState} from 'react';
 import { ParsedUrlQuery } from 'querystring'
 import {Product as ProductModel} from "../../_models/product.model";
@@ -26,14 +27,18 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) 
             <div className={styles.product_detail_container}>
                 <div>
                     <div className='image-container'>
-                        <img
+                        <Img
+                            width="400px"
+                            height="400px"
                             className={styles.product_detail_image}
                             src={urlFor(images && images[index]).url()}
                             alt={name}/>
                     </div>
                     <div className={styles.small_images_container}>
                         {images.map((image, i) => (
-                            <img
+                            <Img
+                                width="70px"
+                                height="70px"
                                 className={i === index ? `${styles.small_image} ${styles.selected_image}` : `${styles.small_image}`}
                                 key={i}
                                 src={urlFor(image).url()}
