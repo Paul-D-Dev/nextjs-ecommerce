@@ -11,8 +11,6 @@
   &_image{
     border-radius: 15px;
     background-color: $bg;
-    width: 400px;
-    height: 400px;
     cursor: pointer;
     transition: .3s ease-in-out;
 
@@ -60,8 +58,6 @@
 .small_image{
   border-radius: 8px;
   background-color: $bg;
-  width: 70px;
-  height: 70px;
   cursor: pointer;
 }
 
