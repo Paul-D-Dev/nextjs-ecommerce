@@ -1,5 +1,5 @@
 import {GetStaticProps} from "next";
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import { ParsedUrlQuery } from 'querystring'
 import {Product as ProductModel} from "../../_models/product.model";
 import {Product} from "../../components";
@@ -19,6 +19,7 @@ type Props = {
 }
 const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) => {
     const { images, name, details, price } = productSlug;
+    const [index, setIndex] = useState(0);
 
     return (
         <div>
@@ -27,16 +28,17 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) 
                     <div className='image-container'>
                         <img
                             className={styles.product_detail_image}
-                            src={urlFor(images && images[0]).url()}
+                            src={urlFor(images && images[index]).url()}
                             alt={name}/>
                     </div>
                     <div className={styles.small_images_container}>
                         {images.map((image, i) => (
                             <img
-                                className={styles.small_image}
+                                className={i === index ? `${styles.small_image} ${styles.selected_image}` : `${styles.small_image}`}
                                 key={i}
                                 src={urlFor(image).url()}
                                 alt={name}
+                                onMouseEnter={() => setIndex(i)}
                             />
                         ))}
                     </div>
