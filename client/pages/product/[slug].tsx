@@ -2,8 +2,10 @@ import {GetStaticProps} from "next";
 import React, {FunctionComponent} from 'react';
 import { ParsedUrlQuery } from 'querystring'
 import {Product as ProductModel} from "../../_models/product.model";
+import {Product} from "../../components";
 import styles from '../../styles/ProductDetails.module.scss';
 import {urlFor} from "../../lib/sanity-client";
+import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 /* [slug] for dynamic changes
 * routing is automatically handled by Next.js
@@ -23,7 +25,64 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) 
             <div className={styles.product_detail_container}>
                 <div>
                     <div className='image-container'>
-                        <img src='' alt=""/>
+                        <img
+                            className={styles.product_detail_image}
+                            src={urlFor(images && images[0]).url()}
+                            alt={name}/>
+                    </div>
+                    <div className={styles.small_images_container}>
+                        {images.map((image, i) => (
+                            <img
+                                className={styles.small_image}
+                                key={i}
+                                src={urlFor(image).url()}
+                                alt={name}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className={styles.product_detail_desc}>
+                    <h1>{name}</h1>
+                    <div className={styles.reviews}>
+                        <div>
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiFillStar />
+                            <AiOutlineStar />
+                        </div>
+                        <p>
+                            (20)
+                        </p>
+                    </div>
+                    <h4>Details:</h4>
+                    <p>{details}</p>
+                    <p className={styles.price}>${price}</p>
+                    <div className={styles.quantity}>
+                        <h3>Quantity:</h3>
+                        <p className={styles.quantity_desc}>
+                            <span className={styles.minus} onClick={() => {}}><AiOutlineMinus /></span>
+                            <span className={styles.num}>0</span>
+                            <span className={styles.plus} onClick={() => {}}><AiOutlinePlus /></span>
+                        </p>
+                    </div>
+                    <div className={styles.buttons}>
+                        <button type="button" className={styles.add_to_cart} onClick={() => {}}>Add to Cart</button>
+                        <button type="button" className={styles.buy_now} onClick={() => {}}>Buy Now</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div className={styles.maylike_products_wrapper}>
+                <h2>You may also like</h2>
+                <div className={styles.marquee}>
+                    <div className={`${styles.maylike_products_container} ${styles.track}`}>
+                        {productsData.map((product) => (
+                            <Product key={product._id} product={product} />
+                        ))}
                     </div>
                 </div>
             </div>
