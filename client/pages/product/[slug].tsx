@@ -4,6 +4,7 @@ import React, {FunctionComponent, useState} from 'react';
 import { ParsedUrlQuery } from 'querystring'
 import {Product as ProductModel} from "../../_models/product.model";
 import {Product} from "../../components";
+import {useStateProvider} from "../../context/StateProvider";
 import styles from '../../styles/ProductDetails.module.scss';
 import {urlFor} from "../../lib/sanity-client";
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -21,6 +22,7 @@ type Props = {
 const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) => {
     const { images, name, details, price } = productSlug;
     const [index, setIndex] = useState(0);
+    const { increaseQty, decreaseQty, qty } = useStateProvider();
 
     return (
         <div>
@@ -69,9 +71,9 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) 
                     <div className={styles.quantity}>
                         <h3>Quantity:</h3>
                         <p className={styles.quantity_desc}>
-                            <span className={styles.minus} onClick={() => {}}><AiOutlineMinus /></span>
-                            <span className={styles.num}>0</span>
-                            <span className={styles.plus} onClick={() => {}}><AiOutlinePlus /></span>
+                            <span className={styles.minus} onClick={decreaseQty}><AiOutlineMinus /></span>
+                            <span className={styles.num}>{qty}</span>
+                            <span className={styles.plus} onClick={increaseQty}><AiOutlinePlus /></span>
                         </p>
                     </div>
                     <div className={styles.buttons}>
