@@ -9,6 +9,6 @@ export type StateContextType = {
     qty: number;
 }
 
-export type StateContextProps = {
+export type StateProviderProps = {
     children: React.ReactNode;
 }

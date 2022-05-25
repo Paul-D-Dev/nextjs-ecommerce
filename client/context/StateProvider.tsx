@@ -1,10 +1,10 @@
 import React, {createContext, FunctionComponent, useState} from 'react';
-import {StateContextProps, StateContextType} from "./@types/state_context.type";
+import {StateProviderProps, StateContextType} from "./@types/state_context.type";
 
 
-const Context = createContext<StateContextType | null>(null);
+export const StateContext = createContext<StateContextType | null>(null);
 
-export const StateContext: FunctionComponent<StateContextProps> = ({children}) => {
+export const StateProvider: FunctionComponent<StateProviderProps> = ({children}) => {
     const [showCart, setShowCart] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -12,7 +12,7 @@ export const StateContext: FunctionComponent<StateContextProps> = ({children}) =
     const [qty, setQty] = useState(1);
 
     return (
-        <Context.Provider
+        <StateContext.Provider
             value={{
                 showCart,
                 cartItems,
@@ -22,7 +22,7 @@ export const StateContext: FunctionComponent<StateContextProps> = ({children}) =
             }}
         >
             {children}
-        </Context.Provider>
+        </StateContext.Provider>
     )
 }
 

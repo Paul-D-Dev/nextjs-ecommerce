@@ -1,15 +1,15 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import {Layout} from "../components";
-import {StateContext} from '../context/StateContext';
+import {StateProvider} from '../context/StateProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-      <StateContext>
+      <StateProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-      </StateContext>
+      </StateProvider>
   )
 }
 
