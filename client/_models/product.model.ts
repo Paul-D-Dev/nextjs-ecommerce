@@ -1,7 +1,8 @@
+import {IProduct, Slug} from "../_interfaces/product.interface";
 import {client} from "../lib/sanity-client";
-import {Image} from "./image.interface";
+import {Image} from "../_interfaces/sanity.interface";
 
-export class Product {
+export class Product implements IProduct {
     _id?: string;
     name: string;
     slug: Slug;
@@ -52,10 +53,7 @@ export class Product {
 
 }
 
-interface Slug {
-    current: string;
-    _type: string;
-}
+
 
 
 

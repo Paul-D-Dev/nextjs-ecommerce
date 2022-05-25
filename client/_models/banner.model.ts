@@ -1,7 +1,8 @@
+import {IBanner} from "../_interfaces/banner.interface";
 import {client} from "../lib/sanity-client";
-import {Image} from "./image.interface";
+import {Image} from "../_interfaces/sanity.interface";
 
-export class Banner {
+export class Banner implements IBanner {
     image: Image;
     buttonText: string;
     product: string;
