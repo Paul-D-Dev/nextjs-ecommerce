@@ -1,4 +1,5 @@
 import React, {createContext, FunctionComponent, useContext, useState} from 'react';
+import {toast} from "react-hot-toast";
 import {IProduct} from "../_interfaces/product.interface";
 import {StateProviderProps, StateContextType, CartItem} from "./@types/state_context.type";
 
@@ -57,6 +58,7 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
 
             setCartItems([...cartItems, { ...newCartItem }]);
         }
+        toast.success(`${qty} ${product.name} added to cart`);
 
     }
 
