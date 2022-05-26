@@ -70,10 +70,10 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) 
                     <p className={styles.price}>${price}</p>
                     <div className={styles.quantity}>
                         <h3>Quantity:</h3>
-                        <p className={styles.quantity_desc}>
-                            <span className={styles.minus} onClick={decreaseQty}><AiOutlineMinus /></span>
-                            <span className={styles.num}>{qty}</span>
-                            <span className={styles.plus} onClick={increaseQty}><AiOutlinePlus /></span>
+                        <p className="quantity_desc">
+                            <span className="minus" onClick={decreaseQty}><AiOutlineMinus /></span>
+                            <span className="num">{qty}</span>
+                            <span className="plus" onClick={increaseQty}><AiOutlinePlus /></span>
                         </p>
                     </div>
                     <div className={styles.buttons}>
