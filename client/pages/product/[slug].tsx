@@ -22,7 +22,7 @@ type Props = {
 const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) => {
     const { images, name, details, price } = productSlug;
     const [index, setIndex] = useState(0);
-    const { increaseQty, decreaseQty, qty } = useStateProvider();
+    const { increaseQty, decreaseQty, qty, onAdd } = useStateProvider();
 
     return (
         <div>
@@ -77,7 +77,7 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) 
                         </p>
                     </div>
                     <div className={styles.buttons}>
-                        <button type="button" className={styles.add_to_cart} onClick={() => {}}>Add to Cart</button>
+                        <button type="button" className={styles.add_to_cart} onClick={() => onAdd(productSlug, qty)}>Add to Cart</button>
                         <button type="button" className={styles.buy_now} onClick={() => {}}>Buy Now</button>
                     </div>
                 </div>
