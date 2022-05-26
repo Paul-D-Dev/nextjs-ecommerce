@@ -13,7 +13,8 @@ const initialContext: StateContextType = {
     qty: 0,
     increaseQty: () => {},
     decreaseQty: () => {},
-    onAdd: (product, quantity) => {}
+    onAdd: (product, quantity) => {},
+    setShowCart: (showCart) => {},
 }
 
 export const StateContext = createContext<StateContextType>(initialContext);
@@ -83,7 +84,8 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
                 qty,
                 increaseQty,
                 decreaseQty,
-                onAdd
+                onAdd,
+                setShowCart
             }}
         >
             {children}
