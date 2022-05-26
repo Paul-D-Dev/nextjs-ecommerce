@@ -11,7 +11,7 @@ import styles from '../styles/Cart.module.scss';
 
 const Cart = () => {
     const cartRef = useRef<HTMLDivElement>(null);
-    const { totalPrice, totalQuantities, cartItems, setShowCart } = useStateProvider();
+    const { totalPrice, totalQuantities, cartItems, setShowCart, updateQtyCartItem } = useStateProvider();
 
     return (
         <div className={styles.cart_wrapper}>
@@ -55,11 +55,11 @@ const Cart = () => {
                                 <div className="flex bottom">
                                     <div>
                                         <p className="quantity_desc">
-                                            <span className="minus" onClick={() => {}}>
+                                            <span className="minus" onClick={() => {updateQtyCartItem(item._id!, 'decrease')}}>
                                                 <AiOutlineMinus />
                                             </span>
                                             <span className="num" onClick={() => {}}>{item.quantity}</span>
-                                            <span className="plus" onClick={() => {}}>
+                                            <span className="plus" onClick={() => {updateQtyCartItem(item._id!, 'increase')}}>
                                                 <AiOutlinePlus />
                                             </span>
                                         </p>

@@ -15,6 +15,7 @@ const initialContext: StateContextType = {
     decreaseQty: () => {},
     onAdd: (product, quantity) => {},
     setShowCart: (showCart) => {},
+    updateQtyCartItem: (id, action) => {},
 }
 
 export const StateContext = createContext<StateContextType>(initialContext);
@@ -27,6 +28,8 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [totalQuantities, setTotalQuantities] = useState<number>(0);
     const [qty, setQty] = useState<number>(1);
+    let foundProduct: CartItem | undefined;
+    let index: number;
 
     const onAdd = (product: IProduct, quantity: number) => {
         // Check if product already exists in cart
@@ -74,6 +77,41 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
         });
     }
 
+    const updateQtyCartItem = (id: string, action: string) => {
+        foundProduct = cartItems.find(item => item._id === id);
+        index = cartItems.findIndex(item => item._id === id);
+        // Create new cartItems array without the foundProduct
+        // Don't use splice because it mutates the original array
+        let newCartItems: CartItem[] = cartItems;
+        if (!foundProduct) throw new Error('Product not found');
+
+
+        try {
+            if (action === 'increase') {
+                foundProduct.quantity += 1;
+                setTotalPrice(prevTotalPrice => prevTotalPrice + foundProduct!.price);
+                setTotalQuantities(prevTotalQuantities => prevTotalQuantities + 1);
+            } else if
+                (action === 'decrease') {
+                    if (foundProduct.quantity > 1) {
+                        foundProduct.quantity -= 1;
+                        setTotalPrice(prevTotalPrice => prevTotalPrice - foundProduct!.price);
+                        setTotalQuantities(prevTotalQuantities => prevTotalQuantities - 1);
+                    } else {
+                        return;
+                    }
+            }
+            newCartItems[index] = foundProduct;
+            setCartItems([...newCartItems]);
+
+        } catch (e) {
+            console.log(e);
+        }
+
+
+
+    }
+
     return (
         <StateContext.Provider
             value={{
@@ -85,7 +123,8 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
                 increaseQty,
                 decreaseQty,
                 onAdd,
-                setShowCart
+                setShowCart,
+                updateQtyCartItem
             }}
         >
             {children}

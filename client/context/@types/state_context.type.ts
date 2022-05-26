@@ -11,6 +11,7 @@ export type StateContextType = {
     decreaseQty: () => void;
     onAdd: (product: IProduct, quantity: number) => void;
     setShowCart: (showCart: boolean) => void;
+    updateQtyCartItem: (id:string, action: string) => void;
 }
 
 export type StateProviderProps = {
