@@ -49,6 +49,11 @@
   text-decoration: line-through;
 }
 
+.image_container {
+  width: 400px;
+  height: 400px;
+}
+
 .small_images_container{
   display: flex;
   gap: 10px;
@@ -174,6 +179,11 @@
       width: 350px;
       height: 350px;
     }
+  }
+
+  .image_container {
+    width: 275px;
+    height: 275px;
   }
 
   .buttons {

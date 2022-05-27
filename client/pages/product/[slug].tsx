@@ -37,7 +37,7 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData })
         <div>
             <div className={styles.product_detail_container}>
                 <div>
-                    <div className='image-container'>
+                    <div className={styles.image_container}>
                         <Img
                             width="100%"
                             height="100%"
