@@ -13,6 +13,7 @@ export type StateContextType = {
     setShowCart: (showCart: boolean) => void;
     updateQtyCartItem: (id:string, action: string) => void;
     onRemove: (product: CartItem) => void;
+    setQty: (qty: number) => void;
 }
 
 export type StateProviderProps = {

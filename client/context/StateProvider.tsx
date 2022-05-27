@@ -17,6 +17,7 @@ const initialContext: StateContextType = {
     setShowCart: (showCart) => {},
     updateQtyCartItem: (id, action) => {},
     onRemove: (product) => {},
+    setQty: (qty) => {},
 }
 
 export const StateContext = createContext<StateContextType>(initialContext);
@@ -24,11 +25,11 @@ export const StateContext = createContext<StateContextType>(initialContext);
 export const StateProvider: FunctionComponent<StateProviderProps> = (
         {children}
     ) => {
-    const [showCart, setShowCart] = useState<boolean>(false);
+    const [showCart, setShowCart] = useState(false);
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
-    const [totalPrice, setTotalPrice] = useState<number>(0);
-    const [totalQuantities, setTotalQuantities] = useState<number>(0);
-    const [qty, setQty] = useState<number>(1);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalQuantities, setTotalQuantities] = useState(0);
+    const [qty, setQty] = useState(1);
     let foundProduct: CartItem | undefined;
     let index: number;
 
@@ -112,14 +113,10 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
 
     const onRemove = (product: CartItem) => {
         const newCartItems = cartItems.filter(item => item._id !== product._id);
-
-        try {
             setTotalPrice(prevTotalPrice => prevTotalPrice - (product!.price * product!.quantity));
             setTotalQuantities(prevTotalQuantities => prevTotalQuantities - product!.quantity);
             setCartItems(newCartItems);
-        } catch (e) {
-            console.log(e);
-        }
+
     }
 
     return (
@@ -135,7 +132,8 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
                 onAdd,
                 setShowCart,
                 updateQtyCartItem,
-                onRemove
+                onRemove,
+                setQty
             }}
         >
             {children}
@@ -143,6 +141,6 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
     )
 }
 
-// Work lise a hook
+// Work like a hook
 export const useStateProvider = () => useContext(StateContext);
 

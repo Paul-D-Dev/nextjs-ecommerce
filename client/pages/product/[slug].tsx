@@ -1,6 +1,7 @@
 import {GetStaticProps} from "next";
 import Img from "next/image";
-import React, {FunctionComponent, useState} from 'react';
+import {useRouter} from "next/router";
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import { ParsedUrlQuery } from 'querystring'
 import {Product as ProductModel} from "../../_models/product.model";
 import {Product} from "../../components";
@@ -19,10 +20,18 @@ type Props = {
     productSlug: ProductModel;
     productsData: ProductModel[];
 }
-const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) => {
+
+const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData }) => {
     const { images, name, details, price } = productSlug;
     const [index, setIndex] = useState(0);
-    const { increaseQty, decreaseQty, qty, onAdd } = useStateProvider();
+    const { increaseQty, decreaseQty, qty, onAdd, setQty } = useStateProvider();
+
+    // get query params to trigger useEffect to update qty
+    const { query } = useRouter();
+
+    useEffect(() => {
+        setQty(1);
+    }, [query.slug]);
 
     return (
         <div>
@@ -30,8 +39,9 @@ const ProductDetails: FunctionComponent<Props> = ({ productSlug, productsData}) 
                 <div>
                     <div className='image-container'>
                         <Img
-                            width="400px"
-                            height="400px"
+                            width="100%"
+                            height="100%"
+                            layout="responsive"
                             className={styles.product_detail_image}
                             src={urlFor(images && images[index]).url()}
                             alt={name}/>
