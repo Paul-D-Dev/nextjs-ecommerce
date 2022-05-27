@@ -11,7 +11,7 @@ import styles from '../styles/Cart.module.scss';
 
 const Cart = () => {
     const cartRef = useRef<HTMLDivElement>(null);
-    const { totalPrice, totalQuantities, cartItems, setShowCart, updateQtyCartItem } = useStateProvider();
+    const { totalPrice, totalQuantities, cartItems, setShowCart, updateQtyCartItem, onRemove } = useStateProvider();
 
     return (
         <div className={styles.cart_wrapper}>
@@ -67,7 +67,7 @@ const Cart = () => {
                                     <button
                                         type="button"
                                         className={styles.cart_remove_item}
-                                        onClick={() => {}}
+                                        onClick={() => {onRemove(item)}}
                                     >
                                         <TiDeleteOutline />
                                     </button>

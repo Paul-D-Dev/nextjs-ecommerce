@@ -16,6 +16,7 @@ const initialContext: StateContextType = {
     onAdd: (product, quantity) => {},
     setShowCart: (showCart) => {},
     updateQtyCartItem: (id, action) => {},
+    onRemove: (product) => {},
 }
 
 export const StateContext = createContext<StateContextType>(initialContext);
@@ -85,7 +86,6 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
         let newCartItems: CartItem[] = cartItems;
         if (!foundProduct) throw new Error('Product not found');
 
-
         try {
             if (action === 'increase') {
                 foundProduct.quantity += 1;
@@ -108,8 +108,18 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
             console.log(e);
         }
 
+    }
 
+    const onRemove = (product: CartItem) => {
+        const newCartItems = cartItems.filter(item => item._id !== product._id);
 
+        try {
+            setTotalPrice(prevTotalPrice => prevTotalPrice - (product!.price * product!.quantity));
+            setTotalQuantities(prevTotalQuantities => prevTotalQuantities - product!.quantity);
+            setCartItems(newCartItems);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (
@@ -124,7 +134,8 @@ export const StateProvider: FunctionComponent<StateProviderProps> = (
                 decreaseQty,
                 onAdd,
                 setShowCart,
-                updateQtyCartItem
+                updateQtyCartItem,
+                onRemove
             }}
         >
             {children}
