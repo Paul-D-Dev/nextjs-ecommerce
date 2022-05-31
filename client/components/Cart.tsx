@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
@@ -6,12 +5,34 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
 
 import { useStateProvider } from '../context/StateProvider';
+import getStripe from "../lib/getStripe";
 import { urlFor } from '../lib/sanity-client';
 import styles from '../styles/Cart.module.scss';
 
 const Cart = () => {
     const cartRef = useRef<HTMLDivElement>(null);
     const { totalPrice, totalQuantities, cartItems, setShowCart, updateQtyCartItem, onRemove } = useStateProvider();
+    const handleCheckout = async () => {
+        const stripe = await getStripe();
+
+        // Folder api/stripe
+        const response = await fetch('/api/stripe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cartItems)
+        });
+
+        if (response.status === 500) return;
+
+        const data = await response.json();
+
+        // Go to checkout page from Stripe
+        stripe.redirectToCheckout({
+            sessionId: data.id
+        });
+    }
 
     return (
         <div className={styles.cart_wrapper}>
@@ -88,7 +109,7 @@ const Cart = () => {
                             <button
                                 type="button"
                                 className="btn"
-                                onClick={() => {}}
+                                onClick={() => {handleCheckout()}}
                             >
                                 Pay with Stripe
                             </button>
