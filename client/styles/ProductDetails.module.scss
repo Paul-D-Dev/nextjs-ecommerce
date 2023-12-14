@@ -49,6 +49,11 @@
   text-decoration: line-through;
 }
 
+.image_container {
+  width: 400px;
+  height: 400px;
+}
+
 .small_images_container{
   display: flex;
   gap: 10px;
@@ -79,31 +84,6 @@
   p{
     color: $accent-color;
     margin-top: 0;
-  }
-}
-
-.quantity_desc{
-  border: 1px solid gray;
-  padding: 6px;
-
-  span{
-    font-size: 16px;
-    padding: 6px 12px;
-    cursor: pointer;
-  }
-
-  .minus{
-    border-right: 1px solid gray;
-    color: $primary-color;
-  }
-
-  .num{
-    border-right: 1px solid gray;
-    font-size: 20px;
-  }
-
-  .plus{
-    color: rgb(49, 168, 49);
   }
 }
 
@@ -172,7 +152,6 @@
   overflow-x: hidden;
 }
 
-
 .track {
   position: absolute;
   white-space: nowrap;
@@ -200,6 +179,11 @@
       width: 350px;
       height: 350px;
     }
+  }
+
+  .image_container {
+    width: 275px;
+    height: 275px;
   }
 
   .buttons {

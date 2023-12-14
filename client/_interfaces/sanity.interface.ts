@@ -8,3 +8,8 @@ interface Asset {
     _ref: string;
     _type: string;
 }
+
+export interface Slug {
+    current: string;
+    _type: string;
+}
